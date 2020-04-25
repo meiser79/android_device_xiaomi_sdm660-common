@@ -1,6 +1,9 @@
 # Bluetooth
 vendor.bluetooth.soc=cherokee
 
+# Dex2oat
+dalvik.vm.dex2oat64.enabled=true
+
 # CNE
 persist.vendor.cne.feature=1
 

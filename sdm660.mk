@@ -105,11 +105,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     AntHalService-Soong
 
-# Biometrics
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_sdm660 \
-    android.hardware.biometrics.fingerprint@2.1.vendor
-
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0 \
@@ -179,6 +174,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.2.vendor \
     android.hardware.drm-service.clearkey
+
+# Fingerprint
+PRODUCT_PACKAGES += \
+    android.hardware.biometrics.fingerprint@2.3-service.xiaomi
 
 # FM
 ifeq ($(BOARD_HAVE_QCOM_FM),true)
@@ -250,6 +249,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.msm.usb.configfs.rc \
+    init.fingerprint.rc \
     init.qcom.early_boot.sh \
     init.qcom.post_boot.sh \
     init.qcom.rc \

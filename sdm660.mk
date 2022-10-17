@@ -65,7 +65,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@5.0-impl:32 \
     android.hardware.audio.service \
     android.hardware.soundtrigger@2.1-impl:32 \
-    audio.a2dp.default \
     audio.primary.sdm660 \
     audio.r_submix.default \
     audio.usb.default \
@@ -144,7 +143,6 @@ PRODUCT_PACKAGES += \
     memtrack.sdm660 \
     libdisplayconfig \
     libtinyxml \
-    libtinyxml.vendor \
     libqdMetaData \
     libqdMetaData.system
 
@@ -335,8 +333,7 @@ PRODUCT_COPY_FILES += \
 
 # QMI
 PRODUCT_PACKAGES += \
-    libjson \
-    libjson.vendor
+    libjson
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \

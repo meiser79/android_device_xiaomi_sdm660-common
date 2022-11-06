@@ -25,6 +25,8 @@ vendor/lib64/libsdsprpc.so|9c3ac49b1a3c7d383c64f7fb554b1c00e2963527
 vendor/lib64/libsysmon_cdsp_skel.so|a76815923b46dbc41ba1a6b0f4942b8da8e52ce0
 
 # ADSP modules - from jasmine
+vendor/lib/rfsa/adsp/capi_v2_aptX_Classic.so|8305c614ebf13f84f15989631b8fdfdb9828d9be
+vendor/lib/rfsa/adsp/capi_v2_aptX_HD.so|eb0e912d25b06f977d5a89345c72d142b7ffb8ae
 vendor/lib/rfsa/adsp/dirac_resource.dar|7728d5b2ee2927a01df5bd6d7edae3736186c844
 vendor/lib/rfsa/adsp/libadsp_fd_skel.so|677d2932dac248049f031fc5893163e22b49439a
 vendor/lib/rfsa/adsp/libadsp_hvx_add_constant.so|26fb64a92d48e801a31a867976d325efa366a255
@@ -56,13 +58,55 @@ vendor/lib64/com.qualcomm.qti.ant@1.0.so|181a8ab9b1d40705d3151821b53732c5566a284
 vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so|aa08f9ec51392ed841f60ad08b7f083312c8c5ee
 
 # Audio - from jasmine
+vendor/lib64/hw/audio.primary.sdm660.so|c002795251aa72e908ed6d756062b16143c975b7
+vendor/lib64/libacdb-fts.so|7efa5d9ec593efd8a449e3cfa43b29d33e3c312a
+vendor/lib64/libacdbloader.so|8cb6cd08907651bf00a73aa5bb5c7d1be4800bfc
+vendor/lib64/libacdbrtac.so|63b112f2a348324dcd27ec8963eb027cddef2fca
+vendor/lib64/libadiertac.so|cb848022d7ba1667a45d120cf6fd7a4fbd270bb7
+vendor/lib64/libaudcal.so|2009240b9036f57c408c8905d91b63eec52939d2
+vendor/lib64/libaudioalsa.so|a743be854f0af2ae8f60d6c598f078a4c09f8b41
+vendor/lib64/libaudio_log_utils.so|a8e0f5215004c493ff9bc4541e91ed8d1b4411a6
+vendor/lib64/libaudioparsers.so|ab849844b97f005231b1b3150e61cd4b67cbdb11
+vendor/lib64/libqtigef.so|14823ccfd03373f7f4ab1bd3705539aa1e2b7ade
+vendor/lib/hw/audio.primary.sdm660.so|4c5975e01ff95784c7e10b7512c63d1e9f8ab743
 vendor/lib/libacdb-fts.so|7e542fe676bdeaf0347dada88683a67cb861d96d
 vendor/lib/libacdbloader.so|ce2494e403e79552793d65f344ce9f79b52ba51a
 vendor/lib/libacdbrtac.so|bacaa968f7da0ed014e6594b928823f0d08a06e6
 vendor/lib/libadiertac.so|ebdd9b6c4e64b38ef39401b1a1e03696583440dc
 vendor/lib/libadm.so|d7c7d22c4fe53312e1e49fbffd587b25fdf0ac89
 vendor/lib/libaudcal.so|f935b8c33972b8cee40f760478f1b64a54705683
+vendor/lib/libaudioalsa.so|272cd6a93bca7edbe3cf4323ca1612737f4f9cde
+vendor/lib/libaudio_log_utils.so|ad36513df2524539496677ff1cbec37037d0b476
+vendor/lib/libaudioparsers.so|485bbd30e2ea7e40d7fbcb3d7aa1f8a222cd2fc4
 vendor/lib/libqtigef.so|e0c548247e923f1e972e7765a678566dd874afb7
+
+# Audio extensions - from jasmine
+vendor/lib64/liba2dpoffload.so|8a24de034dfef2de1978a77114fe16c237d70078
+vendor/lib64/libbatterylistener.so|31162dc7852e8e377c9a6d8c90d425e6091b2235
+vendor/lib64/libcomprcapture.so|1f27153177515098378bffca55eaa532f10794d6
+vendor/lib64/libexthwplugin.so|68962bbfc21f2590c0933d08bd09f14d6d9e76d2
+vendor/lib64/libhdmiedid.so|cb6e517a99c1b364fa2ee731ccf10d02718a41fe
+vendor/lib64/libhdmipassthru.so|01aeec0416b79e42cb9def1ec1879bed15469b67
+vendor/lib64/libhfp.so|433f9ad75f6ce899ff6eb92ac715e8a3fcd15512
+vendor/lib64/libsndmonitor.so|5413817029978653bbe5fc6b8c8f05d1ab294787
+vendor/lib64/libspkrprot.so|79fa50399d8548746b7c6cd93096827434bf125d
+vendor/lib/liba2dpoffload.so|440f208d7c9737cc885ec80925f80c37d6f9e227
+vendor/lib/libbatterylistener.so|be59097c5fabed0c8b3263aa2ef7fff0709abbb6
+vendor/lib/libcomprcapture.so|b2d4398878e25f7526a9ff0dc0085d5a51396619
+vendor/lib/libexthwplugin.so|1988b3b1cd87f130998e7051f0dfff6eeb63e309
+vendor/lib/libhdmiedid.so|b0e718a052ec24594091ebce79d4e0b9dcfa271e
+vendor/lib/libhdmipassthru.so|d1b78f7fe54611f2cad5dacdc492c5e26e8903d0
+vendor/lib/libhfp.so|2ff74fa58c83018c3a2b0857887d79d21c7504ec
+vendor/lib/libsndmonitor.so|a78e2e4d36fbf2c3c1de13f16a5e7f2489a54d6a
+vendor/lib/libspkrprot.so|64d3b4cf5128321ba6fb71da7a2f5b7858965581
+
+# Audio FX modules - from jasmine
+system/etc/permissions/audiosphere.xml|3c6d8f14bd99e52a424282fd5d0a5b9b06485dea
+system/framework/audiosphere.jar|c1679f5aca56f0cb24745b3f7d219acd04833bed
+vendor/lib64/soundfx/libasphere.so|bd48aa3d7cf27bf3b12ce29f429b719383e104fc
+vendor/lib64/soundfx/libqcbassboost.so|8d14a19bff32a4d5f19b998076e7b6ee46787cdc
+vendor/lib64/soundfx/libqcreverb.so|f0b4ffbd5ad1c3031b2cf1cea96521bc87ce2d23
+vendor/lib64/soundfx/libqcvirt.so|09f90491a8ec67db467579a5dd6ef6a8b83723d6
 vendor/lib/soundfx/libasphere.so|b1b26f99d9fbfe75f109349de5505ca39ccd4c8c
 vendor/lib/soundfx/libqcbassboost.so|73339450a42b598a3c13e67b3d4a2266d986fea2
 vendor/lib/soundfx/libqcreverb.so|eb437cd5e264b1adb4546c6a5617c5da17be5839
@@ -72,11 +116,25 @@ vendor/lib/soundfx/libqcvirt.so|ee9eaa81bb24ac0379e06b44ef257967a4d32614
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti|57a0a575a2b1b96176fda1bcb84ea8371c4070d1
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc|a979981c55f3dcaf6cf2212e71b901ca4d58b959
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so|7c0d54f84dd3d2da1806affa7c16dea4bba4d16a
+vendor/lib64/libbtnv.so|08fc5c0a38eca63ebe6f0cd854f6525537141d44
+vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so|54c572215e4a8011fd6f57a061e8450da878c80c
+vendor/lib/libbtnv.so|94864efd66734bd7a4942c2ce7e0acffbe3bee82
+
+# Bluetooth (A2DP) - from jasmine
+vendor/lib64/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so|332bbe7b0e76358500605f7651b0dcfa0cd7f27b
 vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.0-impl.so|71ad8980142e7d8d754607accc0cffd8f5e68dbd
 vendor/lib64/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so|f9dcf9a19a0b601969bcd606bedb8a8419de9d81
-vendor/lib64/libbtnv.so|08fc5c0a38eca63ebe6f0cd854f6525537141d44
+vendor/lib64/btaudio_offload_if.so|9caa0bbcb821e6368d5fc27188e32c92e83c6367
+vendor/lib64/libbluetooth_audio_session_qti.so|1ad5ed72708f791f9b70ca1b4a6e221855dbfa8e
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so|9346946b110086a6b473c8226e072e9a0cdbb87e
 vendor/lib64/vendor.qti.hardware.fm@1.0.so|073cace3aa8d0ffa025d9df67c45f8a907109339
+vendor/lib/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so|947afef6bf7a05a9a2b45022edfed06bd7c00e64
+vendor/lib/hw/vendor.qti.hardware.bluetooth_sar@1.0-impl.so|1360ae1d4f10d3762699d6ce82b456d8a0145a23
+vendor/lib/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so|b2a644519ad0d890274c384f76269de76e706058
+vendor/lib/btaudio_offload_if.so|d9a9795e173dffd4b5ee000acac66c1ad6f1648c
+vendor/lib/libbluetooth_audio_session_qti.so|53fd0369c50fbaef12c22e25e3073a6fc9f05bb7
+vendor/lib/vendor.qti.hardware.bluetooth_sar@1.0.so|5c24249adf85a30aa66f6a391bf697063d989a87
+vendor/lib/vendor.qti.hardware.fm@1.0.so|89a7ec5cc673d13afc73116eccff2e58f218a34d
 
 # Bluetooth (aptX) - from crosshatch-user 10 QP1A.190711.020 5800535 release-keys
 product/lib64/libaptX_encoder.so|df1c89d7af1bb35808d5fe3496b04ba066c10cbc

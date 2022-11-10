@@ -58,7 +58,6 @@ vendor/lib64/com.qualcomm.qti.ant@1.0.so|181a8ab9b1d40705d3151821b53732c5566a284
 vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so|aa08f9ec51392ed841f60ad08b7f083312c8c5ee
 
 # Audio - from jasmine
-vendor/lib/hw/audio.primary.sdm660.so|4c5975e01ff95784c7e10b7512c63d1e9f8ab743
 vendor/lib/libacdb-fts.so|7e542fe676bdeaf0347dada88683a67cb861d96d
 vendor/lib/libacdbloader.so|ce2494e403e79552793d65f344ce9f79b52ba51a
 vendor/lib/libacdbrtac.so|bacaa968f7da0ed014e6594b928823f0d08a06e6
@@ -69,7 +68,6 @@ vendor/lib/libaudio_log_utils.so|ad36513df2524539496677ff1cbec37037d0b476
 vendor/lib/libaudioalsa.so|272cd6a93bca7edbe3cf4323ca1612737f4f9cde
 vendor/lib/libaudioparsers.so|485bbd30e2ea7e40d7fbcb3d7aa1f8a222cd2fc4
 vendor/lib/libqtigef.so|e0c548247e923f1e972e7765a678566dd874afb7
-vendor/lib64/hw/audio.primary.sdm660.so|c002795251aa72e908ed6d756062b16143c975b7
 vendor/lib64/libacdb-fts.so|7efa5d9ec593efd8a449e3cfa43b29d33e3c312a
 vendor/lib64/libacdbloader.so|8cb6cd08907651bf00a73aa5bb5c7d1be4800bfc
 vendor/lib64/libacdbrtac.so|63b112f2a348324dcd27ec8963eb027cddef2fca

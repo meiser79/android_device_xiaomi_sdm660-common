@@ -76,7 +76,8 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libvolumelistener \
-    tinymix
+    tinymix \
+    sound_trigger.primary.sdm660
 
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \

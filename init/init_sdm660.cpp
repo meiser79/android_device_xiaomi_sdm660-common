@@ -164,7 +164,7 @@ void vendor_load_properties()
 
         ReadFileToString(hw_id_file, &hw_device);
         if (hw_device.find("NT51021_BOE_BOE10") != std::string::npos) {
-            property_override("persist.vendor.sys.fp.vendor", "fpc");
+            //property_override("persist.vendor.sys.fp.vendor", "fpc");
             property_override("ro.board.variant", "d9p");
             property_override("vendor.display.lcd_density", "265");
             property_override_dual("ro.product.model", "ro.vendor.product.model", "MI PAD 4 PLUS");
@@ -179,7 +179,7 @@ void vendor_load_properties()
             property_override("persist.vendor.audio.calfile7","/vendor/etc/acdbdata/QRD/sdm660-snd-card-d9p/QRD_D9P_workspaceFile.qwsp");
             property_override("persist.vendor.audio.calfile8","/vendor/etc/acdbdata/adsp_avs_config.acdb");
         } else {
-            property_override("persist.vendor.sys.fp.vendor", "none");
+            //property_override("persist.vendor.sys.fp.vendor", "none");
             property_override("ro.board.variant", "d9");
             property_override("vendor.display.lcd_density", "320");
             property_override_dual("ro.product.model", "ro.vendor.product.model", "MI PAD 4");

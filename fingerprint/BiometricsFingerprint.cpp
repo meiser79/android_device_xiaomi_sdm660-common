@@ -9,7 +9,6 @@
 
 #include <hardware/hw_auth_token.h>
 
-#include <android-base/strings.h>
 #include <hardware/hardware.h>
 #include "BiometricsFingerprint.h"
 #include "UdfpsHandler.h"
@@ -45,7 +44,6 @@ static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
 using RequestStatus = android::hardware::biometrics::fingerprint::V2_1::RequestStatus;
 
 using ::android::base::SetProperty;
-using ::android::base::StartsWith;
 
 BiometricsFingerprint* BiometricsFingerprint::sInstance = nullptr;
 
@@ -247,17 +245,11 @@ Return<RequestStatus> BiometricsFingerprint::setActiveGroup(uint32_t gid,
         ALOGE("Bad path length: %zd", storePath.size());
         return RequestStatus::SYS_EINVAL;
     }
-    std::string mutableStorePath = storePath;
-    if (StartsWith(mutableStorePath, "/data/system/users/")) {
-        mutableStorePath = "/data/vendor_de/";
-        mutableStorePath +=
-                static_cast<std::string>(storePath).substr(strlen("/data/system/users/"));
-    }
-    if (access(mutableStorePath.c_str(), W_OK)) {
+    if (access(storePath.c_str(), W_OK)) {
         return RequestStatus::SYS_EINVAL;
     }
 
-    return ErrorFilter(mDevice->set_active_group(mDevice, gid, mutableStorePath.c_str()));
+    return ErrorFilter(mDevice->set_active_group(mDevice, gid, storePath.c_str()));
 }
 
 Return<RequestStatus> BiometricsFingerprint::authenticate(uint64_t operationId, uint32_t gid) {

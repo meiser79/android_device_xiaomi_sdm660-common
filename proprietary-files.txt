@@ -478,6 +478,7 @@ vendor/lib64/libqcrilFramework.so|3ea985b5e2d77aa5629429e6a535c485236e5b01
 vendor/lib64/libqrtr.so|9addbb504885bb2a82e0b19e38077742bc48c10f
 vendor/lib64/libqsocket.so|dd4067d7a79565f11034277d4ef46698cd17c19b
 vendor/lib64/libril-qc-hal-qmi.so|4179bc3e9eab1194b186fff08287a14b65543c1e
+vendor/lib64/libril-qc-logger.so|39fd61a8d9ed802aea046d17204ef88434522980
 vendor/lib64/libril-qc-ltedirectdisc.so|1bb5daeb65a48eb5dbac5db7f1fe8975fcb6be28
 vendor/lib64/libril-qc-radioconfig.so|c37def8f254404839a413918e94c4aab4d6de137
 vendor/lib64/libril-qcril-hook-oem.so|bc216efecb94b352b1d9be890bbcf5fc29e2f830
@@ -541,6 +542,7 @@ vendor/lib64/com.qualcomm.qti.imscmservice@2.1.so|1c849e793bd10e723ce1ec01d18e06
 vendor/lib64/com.qualcomm.qti.imscmservice@2.2.so|988b20c398c14bc4e1ff62df39edeba5ae904202
 vendor/lib64/com.qualcomm.qti.uceservice@2.0.so|9fba788a6df8f3fdd86e9e16716acfcc07aa121d
 vendor/lib64/com.qualcomm.qti.uceservice@2.1.so|86605caa308898745ec3fcf0882da3279b06db29
+vendor/lib64/deviceInfoServiceModule.so|c7d4021528f3a43320d0f109a9ed5f765a6a92a2
 vendor/lib64/lib-imscmservice.so|ee1f88673ccdb9e94e96b9de8a808e6f11e624ed
 vendor/lib64/lib-imsdpl.so|fb734fbd7833707cc9b65120fd4c8f93e3f4663c
 vendor/lib64/lib-imsqimf.so|86cb96802ba81abd7601d08f9bef52cf8f08c202

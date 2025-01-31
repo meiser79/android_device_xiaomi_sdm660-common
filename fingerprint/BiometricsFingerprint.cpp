@@ -5,37 +5,23 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#define LOG_TAG "android.hardware.biometrics.fingerprint@2.3-service.xiaomi_sdm660"
+#define LOG_TAG "android.hardware.biometrics.fingerprint@2.1-service.xiaomi_sdm660"
 
 #include <hardware/hw_auth_token.h>
 
 #include <hardware/hardware.h>
+#include <hardware/fingerprint.h>
 #include "BiometricsFingerprint.h"
-#include "UdfpsHandler.h"
 
-#include <android-base/properties.h>
+#include <cutils/properties.h>
 #include <inttypes.h>
 #include <unistd.h>
-
-namespace {
-
-typedef struct fingerprint_hal {
-    const char* class_name;
-    const bool is_udfps;
-} fingerprint_hal_t;
-
-static const fingerprint_hal_t kModules[] = {
-        {"fpc", false},        {"fpc_fod", true}, {"goodix", false}, {"goodix_fod", true},
-        {"goodix_fod6", true}, {"silead", false}, {"syna", true},
-};
-
-}  // anonymous namespace
 
 namespace android {
 namespace hardware {
 namespace biometrics {
 namespace fingerprint {
-namespace V2_3 {
+namespace V2_1 {
 namespace implementation {
 
 // Supported fingerprint HAL version
@@ -43,55 +29,20 @@ static const uint16_t kVersion = HARDWARE_MODULE_API_VERSION(2, 1);
 
 using RequestStatus = android::hardware::biometrics::fingerprint::V2_1::RequestStatus;
 
-using ::android::base::SetProperty;
-
 BiometricsFingerprint* BiometricsFingerprint::sInstance = nullptr;
 
 BiometricsFingerprint::BiometricsFingerprint()
     : mClientCallback(nullptr),
-      mDevice(nullptr),
-      mUdfpsHandlerFactory(nullptr),
-      mUdfpsHandler(nullptr) {
+      mDevice(nullptr) {
     sInstance = this;  // keep track of the most recent instance
-    for (auto& [class_name, is_udfps] : kModules) {
-        mDevice = openHal(class_name);
-        if (!mDevice) {
-            ALOGE("Can't open HAL module, class %s", class_name);
-            continue;
-        }
-
-        ALOGI("Opened fingerprint HAL, class %s", class_name);
-        mIsUdfps = is_udfps;
-        SetProperty("persist.vendor.sys.fp.vendor", class_name);
-        break;
-    }
+    mDevice = openHal();
     if (!mDevice) {
-        ALOGE("Can't open any HAL module");
-        SetProperty("persist.vendor.sys.fp.vendor", "none");
-    }
-
-    if (mIsUdfps) {
-        SetProperty("ro.hardware.fp.udfps", "true");
-
-        mUdfpsHandlerFactory = getUdfpsHandlerFactory();
-        if (!mUdfpsHandlerFactory) {
-            ALOGE("Can't get UdfpsHandlerFactory");
-        } else {
-            mUdfpsHandler = mUdfpsHandlerFactory->create();
-            if (!mUdfpsHandler) {
-                ALOGE("Can't create UdfpsHandler");
-            } else {
-                mUdfpsHandler->init(mDevice);
-            }
-        }
+        ALOGE("Can't open HAL module");
     }
 }
 
 BiometricsFingerprint::~BiometricsFingerprint() {
     ALOGV("~BiometricsFingerprint()");
-    if (mUdfpsHandler) {
-        mUdfpsHandlerFactory->destroy(mUdfpsHandler);
-    }
     if (mDevice == nullptr) {
         ALOGE("No valid device");
         return;
@@ -225,9 +176,6 @@ Return<uint64_t> BiometricsFingerprint::getAuthenticatorId() {
 }
 
 Return<RequestStatus> BiometricsFingerprint::cancel() {
-    if (mUdfpsHandler) {
-        mUdfpsHandler->cancel();
-    }
     return ErrorFilter(mDevice->cancel(mDevice));
 }
 
@@ -256,26 +204,6 @@ Return<RequestStatus> BiometricsFingerprint::authenticate(uint64_t operationId, 
     return ErrorFilter(mDevice->authenticate(mDevice, operationId, gid));
 }
 
-Return<bool> BiometricsFingerprint::isUdfps(uint32_t /*sensorId*/) {
-    return mIsUdfps;
-}
-
-Return<void> BiometricsFingerprint::onFingerDown(uint32_t x, uint32_t y, float minor, float major) {
-    if (mUdfpsHandler) {
-        mUdfpsHandler->onFingerDown(x, y, minor, major);
-    }
-
-    return Void();
-}
-
-Return<void> BiometricsFingerprint::onFingerUp() {
-    if (mUdfpsHandler) {
-        mUdfpsHandler->onFingerUp();
-    }
-
-    return Void();
-}
-
 IBiometricsFingerprint* BiometricsFingerprint::getInstance() {
     if (!sInstance) {
         sInstance = new BiometricsFingerprint();
@@ -283,30 +211,36 @@ IBiometricsFingerprint* BiometricsFingerprint::getInstance() {
     return sInstance;
 }
 
-fingerprint_device_t* BiometricsFingerprint::openHal(const char* class_name) {
+void setFpVendorProp(const char *fp_vendor) {
+    property_set("persist.vendor.sys.fp.vendor", fp_vendor);
+}
+
+fingerprint_device_t* getDeviceForVendor(const char *class_name)
+{
     int err;
     const hw_module_t* hw_mdl = nullptr;
     ALOGD("Opening fingerprint hal library...");
+
     if (0 != (err = hw_get_module_by_class(FINGERPRINT_HARDWARE_MODULE_ID, class_name, &hw_mdl))) {
-        ALOGE("Can't open fingerprint HW Module, error: %d", err);
+        ALOGE("Can't open fingerprint module: class %s, error %d", class_name, err);
         return nullptr;
     }
 
     if (hw_mdl == nullptr) {
-        ALOGE("No valid fingerprint module");
+        ALOGE("No valid fingerprint module: class %s", class_name);
         return nullptr;
     }
 
     fingerprint_module_t const* module = reinterpret_cast<const fingerprint_module_t*>(hw_mdl);
     if (module->common.methods->open == nullptr) {
-        ALOGE("No valid open method");
+        ALOGE("No valid open method: class %s", class_name);
         return nullptr;
     }
 
     hw_device_t* device = nullptr;
 
     if (0 != (err = module->common.methods->open(hw_mdl, nullptr, &device))) {
-        ALOGE("Can't open fingerprint methods, error: %d", err);
+        ALOGE("Can't open fingerprint methods, class %s, error: %d", class_name, err);
         return nullptr;
     }
 
@@ -317,6 +251,44 @@ fingerprint_device_t* BiometricsFingerprint::openHal(const char* class_name) {
     }
 
     fingerprint_device_t* fp_device = reinterpret_cast<fingerprint_device_t*>(device);
+
+    ALOGI("Loaded fingerprint module: class %s", class_name);
+    return fp_device;
+}
+
+fingerprint_device_t* getFingerprintDevice()
+{
+    fingerprint_device_t *fp_device;
+
+    fp_device = getDeviceForVendor("fpc");
+    if (fp_device == nullptr) {
+        ALOGE("Failed to load fpc fingerprint module");
+    } else {
+        setFpVendorProp("fpc");
+        return fp_device;
+    }
+
+    fp_device = getDeviceForVendor("goodix");
+    if (fp_device == nullptr) {
+        ALOGE("Failed to load goodix fingerprint module");
+    } else {
+        setFpVendorProp("goodix");
+        return fp_device;
+    }
+
+    setFpVendorProp("none");
+
+    return nullptr;
+}
+
+fingerprint_device_t* BiometricsFingerprint::openHal() {
+    int err;
+
+    fingerprint_device_t* fp_device;
+    fp_device = getFingerprintDevice();
+    if (fp_device == nullptr) {
+        return nullptr;
+    }
 
     if (0 != (err = fp_device->set_notify(fp_device, BiometricsFingerprint::notify))) {
         ALOGE("Can't register fingerprint module callback, error: %d", err);
@@ -349,9 +321,6 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t* msg) {
             FingerprintAcquiredInfo result =
                     VendorAcquiredFilter(msg->data.acquired.acquired_info, &vendorCode);
             ALOGD("onAcquired(%d)", result);
-            if (thisPtr->mUdfpsHandler) {
-                thisPtr->mUdfpsHandler->onAcquired(static_cast<int32_t>(result), vendorCode);
-            }
             if (!thisPtr->mClientCallback->onAcquired(devId, result, vendorCode).isOk()) {
                 ALOGE("failed to invoke fingerprint onAcquired callback");
             }
@@ -417,7 +386,7 @@ void BiometricsFingerprint::notify(const fingerprint_msg_t* msg) {
 }
 
 }  // namespace implementation
-}  // namespace V2_3
+}  // namespace V2_1
 }  // namespace fingerprint
 }  // namespace biometrics
 }  // namespace hardware

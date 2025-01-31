@@ -182,7 +182,8 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.3-service.xiaomi_sdm660
+    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_sdm660 \
+    android.hardware.biometrics.fingerprint@2.1.vendor
 
 # FM
 ifeq ($(BOARD_HAVE_QCOM_FM),true)
@@ -256,7 +257,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.msm.usb.configfs.rc \
-    init.fingerprint.rc \
     init.qcom.early_boot.sh \
     init.qcom.post_boot.sh \
     init.qcom.rc \

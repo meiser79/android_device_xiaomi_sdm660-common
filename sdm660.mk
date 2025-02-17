@@ -180,8 +180,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_sdm660 \
-    android.hardware.biometrics.fingerprint@2.1.vendor
+    android.hardware.biometrics.fingerprint-service.xiaomi_sdm660
 
 # FM
 ifeq ($(BOARD_HAVE_QCOM_FM),true)

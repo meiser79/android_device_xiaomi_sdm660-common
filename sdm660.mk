@@ -251,6 +251,7 @@ PRODUCT_COPY_FILES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
+    libOmxCore \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw

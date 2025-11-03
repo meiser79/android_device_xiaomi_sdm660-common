@@ -272,8 +272,7 @@ PRODUCT_COPY_FILES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    android.hardware.radio-service.compat \
-    rild
+    android.hardware.radio-service.compat
 
 PRODUCT_PACKAGES += \
     ims-ext-common \

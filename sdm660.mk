@@ -134,10 +134,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.qcom \
     vendor.qti.hardware.memtrack-service
 
-# Doze
-PRODUCT_PACKAGES += \
-    XiaomiDoze
-
 # DPM
 PRODUCT_PACKAGES += \
     libcutils_shim

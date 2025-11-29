@@ -146,10 +146,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
-# Fastbootd
-PRODUCT_PACKAGES += \
-    fastbootd
-
 # Filesystem
 PRODUCT_PACKAGES += \
     e2fsck_ramdisk \
@@ -260,8 +256,6 @@ PRODUCT_PACKAGES += \
     libstagefrighthw
 
 # Partitions
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
 PRODUCT_PACKAGES += \
     vendor_bt_firmware_mountpoint \
     vendor_dsp_mountpoint \

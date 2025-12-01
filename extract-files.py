@@ -69,6 +69,8 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/libwvhidl.so',
     ): blob_fixup()
         .add_needed('libcrypto_shim.so'),
+    'vendor/etc/seccomp_policy': blob_fixup()
+        .regex_replace('socket: 1', ''),
 }  # fmt: skip
 
 module = ExtractUtilsModule(

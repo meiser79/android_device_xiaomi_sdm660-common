@@ -1,3 +1,6 @@
+# Animation override
+persist.sys.activity_anim_perf_override=true
+
 # eBPF
 ro.bpf.kver_override=5.4.299
 

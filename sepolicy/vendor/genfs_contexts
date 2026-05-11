@@ -27,3 +27,6 @@ genfscon sysfs /touchpanel                                      u:object_r:sysfs
 
 # ufs
 genfscon sysfs /devices/soc/c0c4000.sdhci/mmc_host/mmc0/mmc0:0001/block/mmcblk0/queue/discard_max_bytes                                 u:object_r:sysfs_mmc_host:s0
+
+# wlan
+genfscon sysfs /devices/soc/18800000.qcom,icnss/net u:object_r:sysfs_net:s0

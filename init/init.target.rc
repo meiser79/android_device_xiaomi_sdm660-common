@@ -58,6 +58,9 @@ on post-fs
     wait_for_prop vendor.sys.listeners.registered true
     write /dev/ipa 1
 
+on late-fs
+    setprop bootreceiver.enable 0
+
 on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
